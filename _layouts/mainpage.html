@@ -1,0 +1,107 @@
+---
+layout: default
+---
+
+<!-- Page Header -->
+<header class="intro-header" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    <h1>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
+                    <hr class="small">
+                    <span class="subheading">{{ page.description }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Eplain What it Is -->
+     <!-- ******ABOUT****** --> 
+    <section id="about" class="about section">
+        <div class="container">
+            <h2 class="title text-center">What is Approachable?</h2>
+            <p class="text-center">The electronic devices that we use throughout our days are becoming so much less convenient to use. Approachable makes it easy to turn any device into a <a href="https://www.interaction-design.org/literature/book/the-glossary-of-human-computer-interaction/walk-up-and-use-system">Walk-Up-And-Use System</a>. Interaction with Approachable devices is done wirelessly using a smartphone or tablet without any complicated setup or pairing.</p>
+            <div class="row">
+                <div class="item col-md-4 col-sm-4 col-xs-12">
+                    <div class="icon-holder">
+                        <i class="fa fa-mobile"></i>
+                    </div>
+                    <div class="content">
+                        <h3 class="sub-title">No Extra Apps</h3>
+                        <p> Approachable devices work with most new phones. Everything you need to control the device is automatically pulled from the web qutomatically when it is needed .</p>
+                    </div><!--//content-->
+                </div><!--//item-->
+                <div class="item col-md-4 col-sm-4 col-xs-12">
+                    <div class="icon-holder">
+                        <i class="fa fa-clock-o"></i>
+                    </div>
+                    <div class="content">
+                        <h3 class="sub-title">No Pairing</h3>
+                        <p>Approachable devices do not require tedious pairing or setup procedures. Start by tapping your phone against the device or selecting it from your notifications. That's it!</p>
+                    </div><!--//content-->
+                </div><!--//item-->
+                <div class="item col-md-4 col-sm-4 col-xs-12">
+                    <div class="icon-holder">
+                        <i class="fa fa-crosshairs"></i>
+                    </div>
+                    <div class="content">
+                        <h3 class="sub-title">No More Blinky Lights</h3>
+                        <p>Approachable devices present easy to understand diagnostics and user-friendly control interfaces. No more trying to procedures telling users to hold down four buttons until a light blinks three times.</p>
+                    </div><!--//content-->
+                </div><!--//item-->             
+                           
+            </div><!--//row-->            
+        </div><!--//container-->
+    </section><!--//about-->
+<!-- Benefits -->
+    <!-- ******FEATURES****** --> 
+    <section id="features" class="section">
+        <div class="container text-center">
+                    <h2 class="title">Maker and Developer Benefits</h2>
+                    <ul class="feature-list list-unstyled">
+                        <li><i class="fa fa-check"></i> Built on Easy to Integrate Standards</li>
+                        <li><i class="fa fa-check"></i> No App Development</li>
+                        <li><i class="fa fa-check"></i> Build Attractive Buttonless Devices</li>
+                        <li><i class="fa fa-check"></i> Helps with Testing and Diagnostics</li>
+                        <li><i class="fa fa-check"></i> Low hardware Costs</li>
+                    </ul>
+        </div><!--//container-->
+    </section><!--//features-->
+    
+    
+<!-- Components -->
+
+    <section class="about section">
+        <div class="container">
+            <h2 class="title text-center">The Enablers</h2>
+            <p class="text-center">Approachable is built on some killer standards and technologies to deliver this great user experience</p>
+            <div class="row">
+                <div class="col-lg-4 col-sm-6 text-center">
+                    <img class="" style="margin:0 auto;height: 200px;" src="img/PhysWEbLogo2.svg"  alt="">
+                    <h3 class="sub-title"><a href="https://google.github.io/physical-web/" target="_blank">The Physical Web</a></h3>
+                </div>
+                <div class="col-lg-4 col-sm-6 text-center">
+                    <img class="" style="margin:0 auto;height: 200px;" src="img/Eddystone-300x300.png"  height="200" alt="">
+                    <h3 class="sub-title">Eddystone Bluetooth Beacons</h3>
+                </div>
+                <div class="col-lg-4 col-sm-6 text-center">
+                    <img class="" style="margin:0 auto;height: 200px;" src="img/N-Mark_blue.png"  alt="">
+                    <h3 class="sub-title">NFC</h3>
+                </div>
+                           
+            </div><!--//row-->            
+        </div><!--//container-->
+    </section>
+    
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+            {{ content }}
+        </div>
+    </div>
+</div>
+
+<hr>
