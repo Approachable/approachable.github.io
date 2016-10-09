@@ -4,7 +4,7 @@
 
 /* Default */
 @color: #17baef;
-@color-2: #eebf3f;
+@color-2: #e2a706;
 @manilla: #e0e8ec;
 @text-color: #444;
 @text-secondary: #666;
@@ -182,7 +182,7 @@ hr.small {
 		padding: 100px 0 50px;
 		color: white;
 		@media only screen and (min-width: 768px) {
-			padding: 150px 0;
+			padding: 100px 0;
 		}
 	}
 	.site-heading,
@@ -487,6 +487,48 @@ form .row:first-child .floating-label-form-group {
 
 }
 // -- Highlight Color Customization
+
+
+.btn, a.btn {
+    font-family: 'Montserrat', arial, sans-serif;
+    padding: 8px 16px;
+    font-weight:bold;
+    .fa {
+        margin-right: 5px;
+    }
+
+    &:focus {
+        color: #fff;
+    }
+}
+
+a.btn-cta-primary, .btn-cta-primary { 
+    background: darken(@color, 30%);
+    border: 1px solid darken(@color, 30%);
+    color: #fff;
+    font-weight:600;
+    text-transform: uppercase;
+    &:hover {
+        background: darken(@color, 35%);
+        border: 1px solid darken(@color, 35%);
+        color: #fff;
+    }
+}
+
+a.btn-cta-secondary,  .btn-cta-secondary { 
+    background: @color-2;
+    border: 1px solid @color-2;
+    color: #fff;
+    font-weight:600;
+    text-transform: uppercase;
+    &:hover {
+        background: darken(@color-2, 5%);
+        border: 1px solid darken(@color-2, 5%);
+        color: #fff;
+    }
+}
+
+
 
 ::-moz-selection {
 	color: white;
