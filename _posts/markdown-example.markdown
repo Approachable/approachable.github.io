@@ -1,10 +1,9 @@
 ---
 layout:     post
-title:      "Man must explore, and this is exploration at its greatest"
-subtitle:   "Problems look mighty small from 150 miles up"
-date:       2014-09-24 12:00:00
-author:     "Start Bootstrap"
-header-img: "img/post-bg-06.jpg"
+title:      "Innntroduction to Approachable for Developers and Makers"
+subtitle:   "Start Here"
+date:       2016-10-14 12:00:00
+author:     "Approachable"
 ---
 
 > This is Markdown Cheatsheet Demo for **Sustain**, this Jekyll theme. Please check the raw content of this file for the markdown usage.
