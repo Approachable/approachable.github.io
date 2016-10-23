@@ -13,10 +13,10 @@ In this tutorial we will show you how to use Approachable using our sandbox deve
 
 # Materials
 
-* Android Phone
-* [Approachable-Sandbox App](https://play.google.com/store/apps/details?id=tech.approachable.strap&hl=en)
-* [NFC Tools App](https://play.google.com/store/apps/details?id=com.wakdev.wdnfc&hl=en)
-* 2 NFC Tags with at least 100 bytes
+Android Phone
+[Approachable-Sandbox App](https://play.google.com/store/apps/details?id=tech.approachable.strap&hl=en)
+[NFC Tools App](https://play.google.com/store/apps/details?id=com.wakdev.wdnfc&hl=en)
+2 NFC Tags with at least 100 bytes
 
 **NOTE:** there are many types of tag types and historically there have been compatibility issues among many phones, tags, and data formats, but most of that has been worked out now. But to play it safe, stick to an NTAG type which will all support the NDEF format. If buying new tags, we recommend NTAG216.
 
@@ -166,6 +166,7 @@ Now you can copy-and-paste the task and diagnostic schemas into the manifest ske
 ```
 
 
+
 ## Step 2 - Registering With the Approchable Device Registry
 
 Head over to our Developer Sandbox version of the [Approachable Device Registry](https://apprsand.herokuapp.com).
@@ -185,6 +186,7 @@ A given interface of a device is described manifest written in JSON. Products in
 Choose the "create manifest" option and fill out the form. API version can currently be any value and is ignored. Interface description is any text that you want to use to describe the interface.  Copy and Paste your [previously drafted manifest](#manifest) into the "manifest document" box and submit.
 
 You will be sent back to your product list. Select the product and you should see that it now has a manifest document associated with it. Checking the "JSON" for the manifest will show you the manifest that you created, where the value for "i" has been randomly generated. This is the ID that your device will use to identify itself and its current state. Be careful not to confuse this with the product id also shown on the product page.
+
 
 ## Step 3 - Simulate a Device
 
@@ -206,6 +208,7 @@ Exit NFC Tools and from the Android Home screen, scan the tag. The Approachable 
 Select the Wifi Setup task and in the screen that follows, fill in the SSID and password, then "submit". Next, use your second tag and tap the phone to it to write the data to it.
 
 to verify the data that was written, open NFC Tools again and select the "Read" tab. Tap to read the second tag and you should see the tag contents. At the bottom, you should see the record that was written and it should be similar to the [Desired results](#desired-result-from-phone-to-device) that we initially planned
+
 
 ## Step 4 - Simulate a Slightly More Complex Device
 
