@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://approachable.tech/feed.xml" rel="self" type="application/atom+xml" /><link href="http://approachable.tech/" rel="alternate" type="text/html" /><updated>2016-10-23T09:40:22-04:00</updated><id>http://approachable.tech/</id><title>Approachable</title><subtitle>Just Approach and Use Any Device</subtitle><entry><title>Tutorial 1: Basic Use of Approachable With NFC</title><link href="http://approachable.tech/2016/10/15/Tutorial-1/" rel="alternate" type="text/html" title="Tutorial 1: Basic Use of Approachable With NFC" /><published>2016-10-15T08:00:00-04:00</published><updated>2016-10-15T08:00:00-04:00</updated><id>http://approachable.tech/2016/10/15/Tutorial-1</id><content type="html" xml:base="http://approachable.tech/2016/10/15/Tutorial-1/">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://approachable.tech/feed.xml" rel="self" type="application/atom+xml" /><link href="http://approachable.tech/" rel="alternate" type="text/html" /><updated>2016-10-23T09:44:27-04:00</updated><id>http://approachable.tech/</id><title>Approachable</title><subtitle>Just Approach and Use Any Device</subtitle><entry><title>Tutorial 1: Basic Use of Approachable With NFC</title><link href="http://approachable.tech/2016/10/15/Tutorial-1/" rel="alternate" type="text/html" title="Tutorial 1: Basic Use of Approachable With NFC" /><published>2016-10-15T08:00:00-04:00</published><updated>2016-10-15T08:00:00-04:00</updated><id>http://approachable.tech/2016/10/15/Tutorial-1</id><content type="html" xml:base="http://approachable.tech/2016/10/15/Tutorial-1/">&lt;blockquote&gt;
   &lt;p&gt;We are stuck with technology when what we really want is just stuff that works. – Douglas Adams, The Salmon of Doubt&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -18,6 +18,7 @@
 &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; there are many types of tag types and historically there have been compatibility issues among many phones, tags, and data formats, but most of that has been worked out now. But to play it safe, stick to an NTAG type which will all support the NDEF format. If buying new tags, we recommend NTAG216.&lt;/p&gt;
 
 &lt;h1 id=&quot;procedure&quot;&gt;Procedure&lt;/h1&gt;
+
 &lt;h2 id=&quot;step-1---preparing-an-approachable-interface-manifest&quot;&gt;Step 1 - Preparing an Approachable Interface Manifest&lt;/h2&gt;
 &lt;p&gt;This will show you how to create an Interface Manifest which will describe the the device to phone interface that the device is prepared to communicate over in a given state.&lt;/p&gt;
 
@@ -161,6 +162,7 @@
 &lt;/div&gt;
 
 &lt;h2 id=&quot;step-2---registering-with-the-approchable-device-registry&quot;&gt;Step 2 - Registering With the Approchable Device Registry&lt;/h2&gt;
+
 &lt;p&gt;Head over to our Developer Sandbox version of the &lt;a href=&quot;https://apprsand.herokuapp.com&quot;&gt;Approachable Device Registry&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Approachable is still a very young project and features are subject to change at anytime. The developer sandbox is for experimental use and should not be used for production purposes.&lt;/p&gt;
@@ -179,7 +181,7 @@
 
 &lt;p&gt;You will be sent back to your product list. Select the product and you should see that it now has a manifest document associated with it. Checking the “JSON” for the manifest will show you the manifest that you created, where the value for “i” has been randomly generated. This is the ID that your device will use to identify itself and its current state. Be careful not to confuse this with the product id also shown on the product page.&lt;/p&gt;
 
-&lt;h2 id=&quot;simulate-a-device&quot;&gt;Simulate a Device&lt;/h2&gt;
+&lt;h2 id=&quot;step-3---simulate-a-device&quot;&gt;Step 3 - Simulate a Device&lt;/h2&gt;
 
 &lt;p&gt;Now copy the manifest id into a JSON object like this:&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;i&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;YourManifestID&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -200,7 +202,7 @@
 
 &lt;p&gt;to verify the data that was written, open NFC Tools again and select the “Read” tab. Tap to read the second tag and you should see the tag contents. At the bottom, you should see the record that was written and it should be similar to the &lt;a href=&quot;#desired-result-from-phone-to-device&quot;&gt;Desired results&lt;/a&gt; that we initially planned&lt;/p&gt;
 
-&lt;h2 id=&quot;simulate-a-slightly-more-complex-device&quot;&gt;Simulate a Slightly More Complex Device&lt;/h2&gt;
+&lt;h2 id=&quot;step-4---simulate-a-slightly-more-complex-device&quot;&gt;Step 4 - Simulate a Slightly More Complex Device&lt;/h2&gt;
 
 &lt;p&gt;Now we will simulate a device that does more than just identify itself. It will provide data that tells the user something about the state of the device.
 Using NFC Tools, modify your tag to&lt;/p&gt;

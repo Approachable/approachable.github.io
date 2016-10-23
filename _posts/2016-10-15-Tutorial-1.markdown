@@ -22,6 +22,7 @@ In this tutorial we will show you how to use Approachable using our sandbox deve
 
 
 # Procedure
+
 ## Step 1 - Preparing an Approachable Interface Manifest
 This will show you how to create an Interface Manifest which will describe the the device to phone interface that the device is prepared to communicate over in a given state.
 
@@ -166,6 +167,7 @@ Now you can copy-and-paste the task and diagnostic schemas into the manifest ske
 
 
 ## Step 2 - Registering With the Approchable Device Registry
+
 Head over to our Developer Sandbox version of the [Approachable Device Registry](https://apprsand.herokuapp.com).
 
 **NOTE:** Approachable is still a very young project and features are subject to change at anytime. The developer sandbox is for experimental use and should not be used for production purposes.
@@ -184,7 +186,7 @@ Choose the "create manifest" option and fill out the form. API version can curre
 
 You will be sent back to your product list. Select the product and you should see that it now has a manifest document associated with it. Checking the "JSON" for the manifest will show you the manifest that you created, where the value for "i" has been randomly generated. This is the ID that your device will use to identify itself and its current state. Be careful not to confuse this with the product id also shown on the product page.
 
-## Simulate a Device
+## Step 3 - Simulate a Device
 
 Now copy the manifest id into a JSON object like this:
 ```
@@ -205,7 +207,7 @@ Select the Wifi Setup task and in the screen that follows, fill in the SSID and 
 
 to verify the data that was written, open NFC Tools again and select the "Read" tab. Tap to read the second tag and you should see the tag contents. At the bottom, you should see the record that was written and it should be similar to the [Desired results](#desired-result-from-phone-to-device) that we initially planned
 
-## Simulate a Slightly More Complex Device
+## Step 4 - Simulate a Slightly More Complex Device
 
 Now we will simulate a device that does more than just identify itself. It will provide data that tells the user something about the state of the device.
 Using NFC Tools, modify your tag to 
