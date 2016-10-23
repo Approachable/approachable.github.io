@@ -13,10 +13,10 @@ In this tutorial we will show you how to use Approachable using our sandbox deve
 
 # Materials
 
-Android Phone
-[Approachable-Sandbox App](https://play.google.com/store/apps/details?id=tech.approachable.strap&hl=en)
-[NFC Tools App](https://play.google.com/store/apps/details?id=com.wakdev.wdnfc&hl=en)
-2 NFC Tags with at least 100 bytes
+* Android Phone
+* [**Approachable-Sandbox App**](https://play.google.com/store/apps/details?id=tech.approachable.strap&hl=en)
+* [**NFC Tools App**](https://play.google.com/store/apps/details?id=com.wakdev.wdnfc&hl=en)
+* 2 NFC Tags with at least 100 bytes
 
 **NOTE:** there are many types of tag types and historically there have been compatibility issues among many phones, tags, and data formats, but most of that has been worked out now. But to play it safe, stick to an NTAG type which will all support the NDEF format. If buying new tags, we recommend NTAG216.
 
