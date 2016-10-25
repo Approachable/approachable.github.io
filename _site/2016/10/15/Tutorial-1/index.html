@@ -121,7 +121,7 @@
 <h2 id="step-1---preparing-an-approachable-interface-manifest">Step 1 - Preparing an Approachable Interface Manifest</h2>
 <p>This will show you how to create an Interface Manifest which will describe the the device to phone interface that the device is prepared to communicate over in a given state.</p>
 
-<p>Using your preferred text editor, start with this skeleton. This is the</p>
+<p>Using your preferred text editor, start with this skeleton.</p>
 
 <h3 id="manifest-skeleton">Manifest Skeleton</h3>
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
@@ -179,9 +179,9 @@
 </span></code></pre>
 </div>
 
-<p>This is a very basic schema, but Approachable supports much more powerful schemas that can be used to provide for very powerful app interfaces. We use the <a href="http://alpacajs.org/">Alpaca JS library</a> to do all of the heavy lifting when it comes to user interface generation, so you can learn more about it capabilities by visiting the <a href="http://alpacajs.org/documentation.html">Alpaca JS Documentation</a>.</p>
+<p>This is a very basic schema, but Approachable supports much more powerful schemas that can be used to provide for more complex app interfaces. We use the <a href="http://alpacajs.org/">Alpaca JS library</a> to do all of the heavy lifting when it comes to user interface generation. You can learn more about it capabilities by visiting the <a href="http://alpacajs.org/documentation.html">Alpaca JS Documentation</a>.</p>
 
-<p>Another useful tool is the <a href="http://www.alpacajs.org/demos/form-builder/form-builder.html">AlpacaJS Form Builder</a>. It will allow you to experiment with the library and get quick look a the resulting application look.</p>
+<p>Another useful tool is the <a href="http://www.alpacajs.org/demos/form-builder/form-builder.html">AlpacaJS Form Builder</a>. It will allow you to experiment with the library and get quick look a the resulting user interface.</p>
 
 <p>We will also create a schema for a read-only diagnostic display:</p>
 
@@ -268,9 +268,17 @@
 
 <p>Sign up for an account. We support a wide range of social logins and do not require a lot of personal information, so registration is painless. Once logged in, you will be on your product list screen.</p>
 
-<p>Next, you need to create a product by selecting the create product link. Product creation is straight forward. The revision field is optional and is there to helpe you manage the state of your project. Fill out the form and submit.</p>
+<p>Next, you need to create a product by selecting the create product link. Product creation is straight forward. The revision field is optional and is there to help you manage the state of your project. Fill out the web form and submit.</p>
 
-<p>Once created you will be returned to the product list. Find you new product and select it. In the next screen, select “update product”. Now you will be in a position to add an interface manifest.</p>
+<blockquote>
+  <p><img src="/img/p/1/1/3.png" alt="3" /></p>
+</blockquote>
+
+<p>Once created you will be returned to the product list. Find your new product and select it. In the next screen, select “update product”. Now you will be in a position to add an interface manifest.</p>
+
+<blockquote>
+  <p><img src="/img/p/1/1/6.png" alt="6" /></p>
+</blockquote>
 
 <p>It is important to understand that Approachable is not specifically for managing communication with products, but is really for managing communication with an interface. In this case, we will be describing the structure and type of data that is being passed over an NFC interface.  The current interface of a device may not be determined by just the product, but also the current state of the device. e.g. a device that supports both a demo and production mode. Likewise, it is possible that two similar products could support identical communication interfaces. For example, the <a href="#manifest">Wifi Device Manifest that we drafted above</a> could be used with almost any device that only needs to configure a Wifi Connection.</p>
 
@@ -278,7 +286,15 @@
 
 <p>Choose the “create manifest” option and fill out the form. API version can currently be any value and is ignored. Interface description is any text that you want to use to describe the interface.  Copy and Paste your <a href="#manifest">previously drafted manifest</a> into the “manifest document” box and submit.</p>
 
+<blockquote>
+  <p><img src="/img/p/1/1/9.png" alt="9" /></p>
+</blockquote>
+
 <p>You will be sent back to your product list. Select the product and you should see that it now has a manifest document associated with it. Checking the “JSON” for the manifest will show you the manifest that you created, where the value for “i” has been randomly generated. This is the ID that your device will use to identify itself and its current state. Be careful not to confuse this with the product id also shown on the product page.</p>
+
+<blockquote>
+  <p><img src="/img/p/1/1/10.png" alt="10" /></p>
+</blockquote>
 
 <h2 id="step-3---simulate-a-device">Step 3 - Simulate a Device</h2>
 
@@ -287,9 +303,13 @@
 </span></code></pre>
 </div>
 
-<p>Replace “YourManifestID” with your manifest id.</p>
+<p>Replace “YourManifestID” with your randomly generated manifest id from the registry. For example, from our images it would be:</p>
 
-<p>This JSON, when encoded on a tag, is going to simulate the most basic function of an Approachable device, which is to identify itself and state via the “i” value. Every Approachable device most always identify itself this way.</p>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="nt">"i"</span><span class="p">:</span><span class="s2">"dn3SNnCdSrWHCQ"</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>This JSON, when encoded on a tag, is going to simulate the most basic function of an Approachable device, which is to identify itself and its state via the “i” value. Every Approachable device most always identify itself this way.</p>
 
 <p>Next, you will write this JSON to a tag. First verify that your Android phone has NFC turned on by checking Settings-&gt;Wireless-&gt;NFC.</p>
 
@@ -304,14 +324,14 @@
 <h2 id="step-4---simulate-a-slightly-more-complex-device">Step 4 - Simulate a Slightly More Complex Device</h2>
 
 <p>Now we will simulate a device that does more than just identify itself. It will provide data that tells the user something about the state of the device.
-Using NFC Tools, modify your tag to</p>
+Using NFC Tools, edit your tag application/approach record to this:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"i"</span><span class="p">:</span><span class="s2">"YourManifestID"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"d"</span><span class="p">:{</span><span class="w">
-        </span><span class="nt">"status"</span><span class="p">:{</span><span class="w">
+        </span><span class="nt">"Status"</span><span class="p">:{</span><span class="w">
             </span><span class="nt">"Connection"</span><span class="p">:</span><span class="s2">"MyRouter"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"dcode"</span><span class="p">:</span><span class="mi">1</span><span class="w">
+            </span><span class="nt">"c"</span><span class="p">:</span><span class="mi">1</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -320,9 +340,9 @@ Using NFC Tools, modify your tag to</p>
 
 <p>Replace “YourManifestID” with your manifest id.</p>
 
-<p>d and d.dcode are reserved for diagnistics and “diagnostic code” respectively.</p>
+<p>d and d.c are reserved for diagnistics and “diagnostic code” respectively.</p>
 
-<p>Now, when your repeat the steps to read this tag, Approachable App will start and you will see that the diagnostic display box has changed color due to the d.c value of 1. The Connection parameter has now been updated with the current connection access point information.</p>
+<p>Now, when your repeat the steps to read this tag, Approachable App will start and you will see that the diagnostic display box has changed color to green due to the d.c value of 1. The Connection parameter has now been updated with the current connection access point information.</p>
 
 
 
