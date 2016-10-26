@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://approachable.tech/feed.xml" rel="self" type="application/atom+xml" /><link href="http://approachable.tech/" rel="alternate" type="text/html" /><updated>2016-10-25T11:21:24-04:00</updated><id>http://approachable.tech/</id><title>Approachable</title><subtitle>Just Approach and Use Any Device</subtitle><entry><title>Tutorial 1: Basic Use of Approachable With NFC</title><link href="http://approachable.tech/2016/10/15/Tutorial-1/" rel="alternate" type="text/html" title="Tutorial 1: Basic Use of Approachable With NFC" /><published>2016-10-15T08:00:00-04:00</published><updated>2016-10-15T08:00:00-04:00</updated><id>http://approachable.tech/2016/10/15/Tutorial-1</id><content type="html" xml:base="http://approachable.tech/2016/10/15/Tutorial-1/">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://approachable.tech/feed.xml" rel="self" type="application/atom+xml" /><link href="http://approachable.tech/" rel="alternate" type="text/html" /><updated>2016-10-26T18:07:16-04:00</updated><id>http://approachable.tech/</id><title>Approachable</title><subtitle>Just Approach and Use Any Device</subtitle><entry><title>Tutorial 1: Basic Use of Approachable With NFC</title><link href="http://approachable.tech/2016/10/15/Tutorial-1/" rel="alternate" type="text/html" title="Tutorial 1: Basic Use of Approachable With NFC" /><published>2016-10-15T08:00:00-04:00</published><updated>2016-10-15T08:00:00-04:00</updated><id>http://approachable.tech/2016/10/15/Tutorial-1</id><content type="html" xml:base="http://approachable.tech/2016/10/15/Tutorial-1/">&lt;blockquote&gt;
   &lt;p&gt;We are stuck with technology when what we really want is just stuff that works. – Douglas Adams, The Salmon of Doubt&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -216,11 +216,27 @@
 
 &lt;p&gt;Open the NFC Tools and select the “write” tab. Select “Add a record” and go to the “Data” option at the bottom. In the dialog, set the content type to application/approach. In the data field add your JSON object. Select “OK” and you will be back at the “Write” tab. Select the “Write / XX bytes” option and you will be prompted to perform the NFC tap. Do this and write the data to the tag.&lt;/p&gt;
 
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;/img/p/1/1/app4.jpg&quot; width=&quot;300&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
 &lt;p&gt;Exit NFC Tools and from the Android Home screen, scan the tag. The Approachable App should automatically start, download the manifest, and provide the user with information saying the state of the Wifi Connection is unkown and a list of the tasks that can be performed.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;/img/p/1/1/app1.jpg&quot; width=&quot;300&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;Select the Wifi Setup task and in the screen that follows, fill in the SSID and password, then “submit”. Next, use your second tag and tap the phone to it to write the data to it.&lt;/p&gt;
 
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;/img/p/1/1/app2.jpg&quot; width=&quot;300&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
 &lt;p&gt;to verify the data that was written, open NFC Tools again and select the “Read” tab. Tap to read the second tag and you should see the tag contents. At the bottom, you should see the record that was written and it should be similar to the &lt;a href=&quot;#desired-result-from-phone-to-device&quot;&gt;Desired results&lt;/a&gt; that we initially planned&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;/img/p/1/1/app3.jpg&quot; width=&quot;300&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;h2 id=&quot;step-4---simulate-a-slightly-more-complex-device&quot;&gt;Step 4 - Simulate a Slightly More Complex Device&lt;/h2&gt;
 
