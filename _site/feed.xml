@@ -1,4 +1,179 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://approachable.tech/feed.xml" rel="self" type="application/atom+xml" /><link href="http://approachable.tech/" rel="alternate" type="text/html" /><updated>2016-10-29T11:32:52-04:00</updated><id>http://approachable.tech/</id><title>Approachable</title><subtitle>Just Approach and Use Any Device</subtitle><entry><title>Tutorial 1: Basic Use of Approachable With NFC</title><link href="http://approachable.tech/2016/10/15/Tutorial-1/" rel="alternate" type="text/html" title="Tutorial 1: Basic Use of Approachable With NFC" /><published>2016-10-15T08:00:00-04:00</published><updated>2016-10-15T08:00:00-04:00</updated><id>http://approachable.tech/2016/10/15/Tutorial-1</id><content type="html" xml:base="http://approachable.tech/2016/10/15/Tutorial-1/">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://approachable.tech/feed.xml" rel="self" type="application/atom+xml" /><link href="http://approachable.tech/" rel="alternate" type="text/html" /><updated>2016-11-18T19:56:10-05:00</updated><id>http://approachable.tech/</id><title>Approachable</title><subtitle>Just Approach and Use Any Device</subtitle><entry><title>Tutorial 2: Approachable + Arduino + NFC = Happy Developer + Happy User</title><link href="http://approachable.tech/2016/10/15/Tutorial-2/" rel="alternate" type="text/html" title="Tutorial 2: Approachable + Arduino + NFC = Happy Developer + Happy User" /><published>2016-10-15T08:00:00-04:00</published><updated>2016-10-15T08:00:00-04:00</updated><id>http://approachable.tech/2016/10/15/Tutorial-2</id><content type="html" xml:base="http://approachable.tech/2016/10/15/Tutorial-2/">&lt;blockquote&gt;
+  &lt;p&gt;“The sooner you start to code, the longer the program will take.” – Roy Carlson&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;summary&quot;&gt;Summary&lt;/h1&gt;
+
+&lt;p&gt;In this tutorial, we introduce Approachable interaction with hardware using an Arduino powered device. We will use the LED on the Arduino to demonstrate a hardware scenario where the desire is to turn a light on and off.&lt;/p&gt;
+
+&lt;h1 id=&quot;materials&quot;&gt;Materials&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Android Phone&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://play.google.com/store/apps/details?id=tech.approachable.strap&amp;amp;hl=en&quot;&gt;&lt;strong&gt;Approachable-Sandbox App&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Arduino Due (other Arduinos should be easy to adapt as well)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.st.com/en/ecosystems/x-nucleo-nfc01a1.html&quot;&gt;ST Micro M24SR Arduino Board&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;/img/p/2/06.jpg&quot; alt=&quot;Hardware1&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;procedure&quot;&gt;Procedure&lt;/h1&gt;
+
+&lt;h2 id=&quot;step-1---creating-an-approachable-interface-manifest&quot;&gt;Step 1 - Creating an Approachable Interface Manifest&lt;/h2&gt;
+
+&lt;p&gt;Since we are trying to manipulate an LED on the Arduino, we will want it to change in response to a message that looks something like this;&lt;/p&gt;
+
+&lt;h3 id=&quot;desired-result-from-phone-to-device&quot;&gt;Desired Result from phone to device&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+   &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;schema_id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;LED Input&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+   &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;LED State&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;On&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Just as in tutorial 1, we will use the manifest skeleton.&lt;/p&gt;
+&lt;h3 id=&quot;manifest-skeleton&quot;&gt;Manifest Skeleton&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;i&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Wifi Device&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;tasks&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;diagnostics&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;We will then expand the skeleton to include a task that will be used for changing the device state, and a diagnostic that will be used to display the current state of the device when scanned. The final manifest will look like this.&lt;/p&gt;
+
+&lt;h3 id=&quot;manifest&quot;&gt;Manifest&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+   &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;i&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+   &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Illumation Device&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+   &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;tasks&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Light Settings&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;schema_id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;LED Input&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;schema&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;object&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;properties&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+               &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;LED State&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;enum&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                     &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;On&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                     &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Off&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;required&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+               &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;options&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;fields&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+               &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;LED State&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;radio&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;label&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Light Switch&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;showMessages&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;hideInitValidationError&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+               &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+   &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+   &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;diagnostics&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;schema_id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;LED output&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;schema&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;title&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;status&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;object&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;properties&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+               &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;LED State&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;title&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Light Is Currently: &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;string&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+               &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;data&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;LED State&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Unknown&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+   &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;step-2---registering-with-the-approchable-device-registry&quot;&gt;Step 2 - Registering With the Approchable Device Registry&lt;/h2&gt;
+
+&lt;p&gt;Following the same steps as Tutorial 1, we head over to our Developer Sandbox version of the &lt;a href=&quot;https://apprsand.herokuapp.com&quot;&gt;Approachable Device Registry&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;We create a new product and then a manifest for our product where we upload our previously created manifest. The registry will assign an interface identifer “i” to our product. In the below picture it is the value “fH4pI0khRSqNEw”. Your value will be different&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;/img/p/2/07.png&quot; alt=&quot;Registry&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;step-3---arduino-setup&quot;&gt;Step 3 - Arduino Setup&lt;/h2&gt;
+
+&lt;p&gt;Git clone our library for using the &lt;a href=&quot;https://bitbucket.org/approachable/m24sr-arduino&quot;&gt;M24SR Tag with Arduino&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone --recursive https://bitbucket.org/approachable/m24sr-arduino.git
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The recursive flag is necessary to automatically pull in some of the libraries that are git submodules.&lt;/p&gt;
+
+&lt;p&gt;Copy the examples and libraries of the repository into your Arduino folder.&lt;/p&gt;
+
+&lt;p&gt;Make sure you are using a recent enough version of the Arduino IDE. We tested this on 1.6.7. Start the IDE and with the library manager, find and install Arduinojson. Open the example approachable-LED.ino that was copied into your sketchbook and verify that it compiles for the Arduino Due or other target board.&lt;/p&gt;
+
+&lt;p&gt;Mount the NFC shield on your Arduino and plug the Arduino into your USB.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;/img/p/2/07.jpg&quot; alt=&quot;Hardware2&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;step-4---modify-the-code&quot;&gt;Step 4 - Modify the Code&lt;/h2&gt;
+
+&lt;p&gt;approachable-LED.ino is designed to turn the LED of the arduino on and off based on input from the smartphone user. When it receives data over NFC, it will disable the RF interface and read in the tag data over the i2c bus. If the data can be read and interpreted as valid and useful JSON, the LED will be turned on or off based on the value of “LED State”.&lt;/p&gt;
+
+&lt;p&gt;We won’t cover the code and libraries in great detail here, just the basics.  The uC must perform two main functions.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Read data from the NFC tag over the i2c bus when it is written to by the NFC writer and update the state of the LED accordingly. This is accomplished by the process_nfc and process_JSON functions.&lt;/li&gt;
+  &lt;li&gt;Ensure that the tag is reporting the current state of the device via the NFC tag. This is accomplished by the update_status function.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Everything else is just standard setup and loop functions. More complex procedures such as interrupt handling are accomplished in the included libraries.&lt;/p&gt;
+
+&lt;p&gt;There is only one part of the code that you need to change. Locate the following Macro defining MANIFEST_ID.&lt;/p&gt;
+
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;#define MANIFEST_ID &quot;fH4pI0khRSqNEw&quot;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;replace the value with the interface identifier “i” that was set by the Device Registry in Step 2.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; This demo is readily adapted to other Arduino boards by updating the driver settings in drv_I2C_M24SR.h. Here, the GPO and RFDIS pins can be changed, but the GPO must be used with an interrupt capable pin.&lt;/p&gt;
+
+&lt;h2 id=&quot;step-5---compile-and-test&quot;&gt;Step 5 - Compile and Test&lt;/h2&gt;
+
+&lt;p&gt;You should now be able to compile the code and flash it to the Due board. The serial output can be monitored for some diagnostic output.&lt;/p&gt;
+
+&lt;p&gt;Leave the Board and shield powered and using your phone, while set to its home screen, Perform an NFC scan of the shield. You should be presented with this interface.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;/img/p/2/a-1.png&quot; alt=&quot;Phone1&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The interface and tool were automatically contructed from your manifest. When the phone pulled the manifest id off of the NFC tag, it queried the device registry in order to retrieve the manifest that you constructed.&lt;/p&gt;
+
+&lt;p&gt;Notice the diagnostic display which should report the Light state as “Off”.&lt;/p&gt;
+
+&lt;p&gt;Use the “Light Settings” tool and choose to turn the light on. When prompted, touch your phone to the NFC antenna to write this state change to the NFC tag. An LED on your board should turn on. On the Due, this LED is marked “L” and is located next to the power LED.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;/img/p/2/a-2.png&quot; alt=&quot;Phone2&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Now exit the app and repeat the process. This time you should see that the device reports the Light state as “On”. When you change the Light Settings this time, choose to turn the LED off and you should observe the LED being turned off.&lt;/p&gt;</content><author><name>Approachable</name></author><summary>“The sooner you start to code, the longer the program will take.” – Roy Carlson</summary></entry><entry><title>Tutorial 1: Basic Use of Approachable With NFC</title><link href="http://approachable.tech/2016/10/15/Tutorial-1/" rel="alternate" type="text/html" title="Tutorial 1: Basic Use of Approachable With NFC" /><published>2016-10-15T08:00:00-04:00</published><updated>2016-10-15T08:00:00-04:00</updated><id>http://approachable.tech/2016/10/15/Tutorial-1</id><content type="html" xml:base="http://approachable.tech/2016/10/15/Tutorial-1/">&lt;blockquote&gt;
   &lt;p&gt;We are stuck with technology when what we really want is just stuff that works. – Douglas Adams, The Salmon of Doubt&lt;/p&gt;
 &lt;/blockquote&gt;
 

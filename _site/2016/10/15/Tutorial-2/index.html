@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Just Approach and Use Any Device">
+
+    <title>Tutorial 2: Approachable + Arduino + NFC = Happy Developer + Happy User - Approachable</title>
+
+    <link rel="canonical" href="http://approachable.tech/2016/10/15/Tutorial-2/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/clean-blog.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" href="/css/font-awesome.min.css"  type="text/css">
+    <link rel="stylesheet" href="/css/Lora.css"  type="text/css">
+    <link rel="stylesheet" href="/css/OpenSans.css"  type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link type="application/atom+xml" rel="alternate" href="http://approachable.tech/feed.xml" title="Approachable" />
+
+</head>
+
+
+<body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><div><span> </span>
+            <span id="NAV_TITLE">Approachable</span></div></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                
+				
+                <li>
+                    <a href="/contact/">Contact</a>
+                </li>
+				
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
+    <!-- Post Header -->
+<header class="intro-header" style="background-image: url('/img/logoblue.svg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Tutorial 2: Approachable + Arduino + NFC = Happy Developer + Happy User</h1>
+                    
+                    <span class="meta">Posted by Approachable on October 15, 2016</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-10 col-md-offset-1">
+
+				<blockquote>
+  <p>“The sooner you start to code, the longer the program will take.” – Roy Carlson</p>
+</blockquote>
+
+<h1 id="summary">Summary</h1>
+
+<p>In this tutorial, we introduce Approachable interaction with hardware using an Arduino powered device. We will use the LED on the Arduino to demonstrate a hardware scenario where the desire is to turn a light on and off.</p>
+
+<h1 id="materials">Materials</h1>
+
+<ul>
+  <li>Android Phone</li>
+  <li><a href="https://play.google.com/store/apps/details?id=tech.approachable.strap&amp;hl=en"><strong>Approachable-Sandbox App</strong></a></li>
+  <li>Arduino Due (other Arduinos should be easy to adapt as well)</li>
+  <li><a href="http://www.st.com/en/ecosystems/x-nucleo-nfc01a1.html">ST Micro M24SR Arduino Board</a></li>
+</ul>
+
+<blockquote>
+  <p><img src="/img/p/2/06.jpg" alt="Hardware1" /></p>
+</blockquote>
+
+<h1 id="procedure">Procedure</h1>
+
+<h2 id="step-1---creating-an-approachable-interface-manifest">Step 1 - Creating an Approachable Interface Manifest</h2>
+
+<p>Since we are trying to manipulate an LED on the Arduino, we will want it to change in response to a message that looks something like this;</p>
+
+<h3 id="desired-result-from-phone-to-device">Desired Result from phone to device</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"schema_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LED Input"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"LED State"</span><span class="p">:</span><span class="s2">"On"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>Just as in tutorial 1, we will use the manifest skeleton.</p>
+<h3 id="manifest-skeleton">Manifest Skeleton</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"i"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wifi Device"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"tasks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"diagnostics"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>We will then expand the skeleton to include a task that will be used for changing the device state, and a diagnostic that will be used to display the current state of the device when scanned. The final manifest will look like this.</p>
+
+<h3 id="manifest">Manifest</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"i"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Illumation Device"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"tasks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Light Settings"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"schema_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LED Input"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"schema"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+               </span><span class="nt">"LED State"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                     </span><span class="s2">"On"</span><span class="p">,</span><span class="w">
+                     </span><span class="s2">"Off"</span><span class="w">
+                  </span><span class="p">],</span><span class="w">
+                  </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+               </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="nt">"options"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+               </span><span class="nt">"LED State"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"radio"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Light Switch"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"showMessages"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"hideInitValidationError"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+               </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="nt">"diagnostics"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"schema_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LED output"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"schema"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"status"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+               </span><span class="nt">"LED State"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                  </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Light Is Currently: "</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+               </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"LED State"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown"</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h2 id="step-2---registering-with-the-approchable-device-registry">Step 2 - Registering With the Approchable Device Registry</h2>
+
+<p>Following the same steps as Tutorial 1, we head over to our Developer Sandbox version of the <a href="https://apprsand.herokuapp.com">Approachable Device Registry</a>.</p>
+
+<p>We create a new product and then a manifest for our product where we upload our previously created manifest. The registry will assign an interface identifer “i” to our product. In the below picture it is the value “fH4pI0khRSqNEw”. Your value will be different</p>
+
+<blockquote>
+  <p><img src="/img/p/2/07.png" alt="Registry" /></p>
+</blockquote>
+
+<h2 id="step-3---arduino-setup">Step 3 - Arduino Setup</h2>
+
+<p>Git clone our library for using the <a href="https://bitbucket.org/approachable/m24sr-arduino">M24SR Tag with Arduino</a>.</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>git clone --recursive https://bitbucket.org/approachable/m24sr-arduino.git
+</code></pre>
+</div>
+
+<p>The recursive flag is necessary to automatically pull in some of the libraries that are git submodules.</p>
+
+<p>Copy the examples and libraries of the repository into your Arduino folder.</p>
+
+<p>Make sure you are using a recent enough version of the Arduino IDE. We tested this on 1.6.7. Start the IDE and with the library manager, find and install Arduinojson. Open the example approachable-LED.ino that was copied into your sketchbook and verify that it compiles for the Arduino Due or other target board.</p>
+
+<p>Mount the NFC shield on your Arduino and plug the Arduino into your USB.</p>
+
+<blockquote>
+  <p><img src="/img/p/2/07.jpg" alt="Hardware2" /></p>
+</blockquote>
+
+<h2 id="step-4---modify-the-code">Step 4 - Modify the Code</h2>
+
+<p>approachable-LED.ino is designed to turn the LED of the arduino on and off based on input from the smartphone user. When it receives data over NFC, it will disable the RF interface and read in the tag data over the i2c bus. If the data can be read and interpreted as valid and useful JSON, the LED will be turned on or off based on the value of “LED State”.</p>
+
+<p>We won’t cover the code and libraries in great detail here, just the basics.  The uC must perform two main functions.</p>
+<ul>
+  <li>Read data from the NFC tag over the i2c bus when it is written to by the NFC writer and update the state of the LED accordingly. This is accomplished by the process_nfc and process_JSON functions.</li>
+  <li>Ensure that the tag is reporting the current state of the device via the NFC tag. This is accomplished by the update_status function.</li>
+</ul>
+
+<p>Everything else is just standard setup and loop functions. More complex procedures such as interrupt handling are accomplished in the included libraries.</p>
+
+<p>There is only one part of the code that you need to change. Locate the following Macro defining MANIFEST_ID.</p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="cp">#define MANIFEST_ID "fH4pI0khRSqNEw"
+</span></code></pre>
+</div>
+
+<p>replace the value with the interface identifier “i” that was set by the Device Registry in Step 2.</p>
+
+<p><strong>NOTE:</strong> This demo is readily adapted to other Arduino boards by updating the driver settings in drv_I2C_M24SR.h. Here, the GPO and RFDIS pins can be changed, but the GPO must be used with an interrupt capable pin.</p>
+
+<h2 id="step-5---compile-and-test">Step 5 - Compile and Test</h2>
+
+<p>You should now be able to compile the code and flash it to the Due board. The serial output can be monitored for some diagnostic output.</p>
+
+<p>Leave the Board and shield powered and using your phone, while set to its home screen, Perform an NFC scan of the shield. You should be presented with this interface.</p>
+
+<blockquote>
+  <p><img src="/img/p/2/a-1.png" alt="Phone1" /></p>
+</blockquote>
+
+<p>The interface and tool were automatically contructed from your manifest. When the phone pulled the manifest id off of the NFC tag, it queried the device registry in order to retrieve the manifest that you constructed.</p>
+
+<p>Notice the diagnostic display which should report the Light state as “Off”.</p>
+
+<p>Use the “Light Settings” tool and choose to turn the light on. When prompted, touch your phone to the NFC antenna to write this state change to the NFC tag. An LED on your board should turn on. On the Due, this LED is marked “L” and is located next to the power LED.</p>
+
+<blockquote>
+  <p><img src="/img/p/2/a-2.png" alt="Phone2" /></p>
+</blockquote>
+
+<p>Now exit the app and repeat the process. This time you should see that the device reports the Light state as “On”. When you change the Light Settings this time, choose to turn the LED off and you should observe the LED being turned off.</p>
+
+
+
+                <hr>
+                <!--
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2016/10/15/Tutorial-1/" data-toggle="tooltip" data-placement="top" title="Tutorial 1: Basic Use of Approachable With NFC">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+                -->
+
+            </div>
+        </div>
+    </div>
+</article>
+
+<hr>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://twitter.com/IdeaMindIO">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="https://github.com/approachable">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="mailto:contact@ideamind.io">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">Copyright &copy; Idea Mind LLC 2016</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/clean-blog.min.js "></script>
+
+
+    
+
+
+</body>
+
+</html>
