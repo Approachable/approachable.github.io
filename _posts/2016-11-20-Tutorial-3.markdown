@@ -1,0 +1,64 @@
+---
+layout:     post
+title:      "Tutorial 3: Buttons? We don't need no stinkin buttons!"
+date:       2016-11-20 12:00:00
+author:     "Approachable"
+---
+
+> “Men have become the tools of their tools.” -- Henry David Thoreau
+
+# Summary
+
+This tutorial goes a little off topic to discuss how a really simple circuit can be used along with Approachable software to create devices with no buttons, switches, or displays.
+
+# Rationale
+
+One of the great things about Approachable is that you can design electronics without any buttons, LEDs, displays or other user interface elements because you can use a smart phone to provide all of those functions. That is with one exception, devices may still require a power button or switch to activate the device.
+
+Elimination of all of the buttons and switches could be used to improve many types of devices.
+
+1. Buttons are common failure points on electronics. The get stuck, they wear out, they are common points of moisture intrusion. Elimination of power buttons and use of Approachable would be useful in building ruggedized weatherproof equipment.
+2. Buttons are ugly. Devices without buttons and swtiches can be made more visually appealling. Imagine a battery powered bluetooth speaker that could both be turned on and paired with the tap of a phone.
+3. Buttons are not always user freindly. Consider wearable devices where a button might be easily bumped on accident. Removing buttons from electronic garments would greatly improve their usability.
+
+# Materials
+
+* Android Phone
+* [**NFC Tools App**](https://play.google.com/store/apps/details?id=com.wakdev.wdnfc&hl=en)
+* Approximately 5 Volt power supply
+* Equivalent NPN and PNP Bipolar Junction Transistors (BJT)
+* NXP NTAG I2C -- NT3H1201 or NT3H1101 
+* LED
+* Resistor
+
+# Procedure
+
+In order to pull off a device that does not need a power button or switch, we are going to need to find a way to turn a device on when it is scanned by NFC. An NFC tag can be read and written to without a power source, but in order to generate a trigger signal, we are going to need a little something extra. Fortunately there are several NFC tag chips that are capable of harvesting energy and supplying it to other components. The NXP NTAG I2C that we have listed in our materials does exactly that. Technically, the energy harvested is capable of powering some very basic low power systems, but most application require some sort of additional battery.
+
+Their are two options for attacking this problem
+
+## Option 1
+
+You can use the energy harvesting output to wake up a microcontroller that then enables the rest of the system. In this scenario you take a microcontroller that can go into a very low power sleep state and you tie the energy harvested trigger to a an a pin that is capable of waking the microcontroller from its sleep state.
+
+Once the microcontroller is awake, it can the enabe any remaining components.
+
+## Option 2
+
+The downside with Option 1, is that it requires you to adapt you microcontroller choice and power management in order to create this design. A simpler approach would be to replace th typical switch that sits between the battery and power management with a simple circuit that does not require you to change the rest of your architecture.
+
+The solution to this is a circuit that will "latch" open when it first receives the trigger signal from the NFC tag energy harvesting output. The simplest latch circuit is a complimentary latch using NPN and PNP Bipolar Junction Transistors:
+
+> ![Complimentary-Latch](/img/p/3/c-latch.png)
+
+The trigger will open the NPN gate, which will in turn open the PNP gate causing a feedback loop between the two gates, keeping them open.
+
+Wiring up our NTAG is straightforward. It does not even require power. For the antenna, a simple wound coil of wire will work and the V_out (energy harvested) can be connected as the trigger signal to the latch.
+
+> ![Circuit](/img/p/3/circuit.png)
+
+In order to test the circuit, use the LED and resistor in series as the Load.
+
+Using any NFC app, such as NFC Tools, perform a read or write of the tag and watch as the LED is powered.
+
+**NOTE:** This latch circuit is not necessarily optimal for all purposes. In the future, we will update this post with some improved latch circuits that can be used in different situations.

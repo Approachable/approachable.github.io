@@ -1,4 +1,70 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://approachable.tech/feed.xml" rel="self" type="application/atom+xml" /><link href="http://approachable.tech/" rel="alternate" type="text/html" /><updated>2016-11-18T19:56:10-05:00</updated><id>http://approachable.tech/</id><title>Approachable</title><subtitle>Just Approach and Use Any Device</subtitle><entry><title>Tutorial 2: Approachable + Arduino + NFC = Happy Developer + Happy User</title><link href="http://approachable.tech/2016/10/15/Tutorial-2/" rel="alternate" type="text/html" title="Tutorial 2: Approachable + Arduino + NFC = Happy Developer + Happy User" /><published>2016-10-15T08:00:00-04:00</published><updated>2016-10-15T08:00:00-04:00</updated><id>http://approachable.tech/2016/10/15/Tutorial-2</id><content type="html" xml:base="http://approachable.tech/2016/10/15/Tutorial-2/">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://approachable.tech/feed.xml" rel="self" type="application/atom+xml" /><link href="http://approachable.tech/" rel="alternate" type="text/html" /><updated>2016-11-20T11:47:05-05:00</updated><id>http://approachable.tech/</id><title>Approachable</title><subtitle>Just Approach and Use Any Device</subtitle><entry><title>Tutorial 3: Buttons? We don’t need no stinkin buttons!</title><link href="http://approachable.tech/2016/11/20/Tutorial-3/" rel="alternate" type="text/html" title="Tutorial 3: Buttons? We don't need no stinkin buttons!" /><published>2016-11-20T07:00:00-05:00</published><updated>2016-11-20T07:00:00-05:00</updated><id>http://approachable.tech/2016/11/20/Tutorial-3</id><content type="html" xml:base="http://approachable.tech/2016/11/20/Tutorial-3/">&lt;blockquote&gt;
+  &lt;p&gt;“Men have become the tools of their tools.” – Henry David Thoreau&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;summary&quot;&gt;Summary&lt;/h1&gt;
+
+&lt;p&gt;This tutorial goes a little off topic to discuss how a really simple circuit can be used along with Approachable software to create devices with no buttons, switches, or displays.&lt;/p&gt;
+
+&lt;h1 id=&quot;rationale&quot;&gt;Rationale&lt;/h1&gt;
+
+&lt;p&gt;One of the great things about Approachable is that you can design electronics without any buttons, LEDs, displays or other user interface elements because you can use a smart phone to provide all of those functions. That is with one exception, devices may still require a power button or switch to activate the device.&lt;/p&gt;
+
+&lt;p&gt;Elimination of all of the buttons and switches could be used to improve many types of devices.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Buttons are common failure points on electronics. The get stuck, they wear out, they are common points of moisture intrusion. Elimination of power buttons and use of Approachable would be useful in building ruggedized weatherproof equipment.&lt;/li&gt;
+  &lt;li&gt;Buttons are ugly. Devices without buttons and swtiches can be made more visually appealling. Imagine a battery powered bluetooth speaker that could both be turned on and paired with the tap of a phone.&lt;/li&gt;
+  &lt;li&gt;Buttons are not always user freindly. Consider wearable devices where a button might be easily bumped on accident. Removing buttons from electronic garments would greatly improve their usability.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;materials&quot;&gt;Materials&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Android Phone&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://play.google.com/store/apps/details?id=com.wakdev.wdnfc&amp;amp;hl=en&quot;&gt;&lt;strong&gt;NFC Tools App&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Approximately 5 Volt power supply&lt;/li&gt;
+  &lt;li&gt;Equivalent NPN and PNP Bipolar Junction Transistors (BJT)&lt;/li&gt;
+  &lt;li&gt;NXP NTAG I2C – NT3H1201 or NT3H1101&lt;/li&gt;
+  &lt;li&gt;LED&lt;/li&gt;
+  &lt;li&gt;Resistor&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;procedure&quot;&gt;Procedure&lt;/h1&gt;
+
+&lt;p&gt;In order to pull off a device that does not need a power button or switch, we are going to need to find a way to turn a device on when it is scanned by NFC. An NFC tag can be read and written to without a power source, but in order to generate a trigger signal, we are going to need a little something extra. Fortunately there are several NFC tag chips that are capable of harvesting energy and supplying it to other components. The NXP NTAG I2C that we have listed in our materials does exactly that. Technically, the energy harvested is capable of powering some very basic low power systems, but most application require some sort of additional battery.&lt;/p&gt;
+
+&lt;p&gt;Their are two options for attacking this problem&lt;/p&gt;
+
+&lt;h2 id=&quot;option-1&quot;&gt;Option 1&lt;/h2&gt;
+
+&lt;p&gt;You can use the energy harvesting output to wake up a microcontroller that then enables the rest of the system. In this scenario you take a microcontroller that can go into a very low power sleep state and you tie the energy harvested trigger to a an a pin that is capable of waking the microcontroller from its sleep state.&lt;/p&gt;
+
+&lt;p&gt;Once the microcontroller is awake, it can the enabe any remaining components.&lt;/p&gt;
+
+&lt;h2 id=&quot;option-2&quot;&gt;Option 2&lt;/h2&gt;
+
+&lt;p&gt;The downside with Option 1, is that it requires you to adapt you microcontroller choice and power management in order to create this design. A simpler approach would be to replace th typical switch that sits between the battery and power management with a simple circuit that does not require you to change the rest of your architecture.&lt;/p&gt;
+
+&lt;p&gt;The solution to this is a circuit that will “latch” open when it first receives the trigger signal from the NFC tag energy harvesting output. The simplest latch circuit is a complimentary latch using NPN and PNP Bipolar Junction Transistors:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;/img/p/3/c-latch.png&quot; alt=&quot;Complimentary-Latch&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The trigger will open the NPN gate, which will in turn open the PNP gate causing a feedback loop between the two gates, keeping them open.&lt;/p&gt;
+
+&lt;p&gt;Wiring up our NTAG is straightforward. It does not even require power. For the antenna, a simple wound coil of wire will work and the V_out (energy harvested) can be connected as the trigger signal to the latch.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;/img/p/3/circuit.png&quot; alt=&quot;Circuit&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In order to test the circuit, use the LED and resistor in series as the Load.&lt;/p&gt;
+
+&lt;p&gt;Using any NFC app, such as NFC Tools, perform a read or write of the tag and watch as the LED is powered.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; This latch circuit is not necessarily optimal for all purposes. In the future, we will update this post with some improved latch circuits that can be used in different situations.&lt;/p&gt;</content><author><name>Approachable</name></author><summary>“Men have become the tools of their tools.” – Henry David Thoreau</summary></entry><entry><title>Tutorial 2: Approachable + Arduino + NFC = Happy Developer + Happy User</title><link href="http://approachable.tech/2016/11/18/Tutorial-2/" rel="alternate" type="text/html" title="Tutorial 2: Approachable + Arduino + NFC = Happy Developer + Happy User" /><published>2016-11-18T07:00:00-05:00</published><updated>2016-11-18T07:00:00-05:00</updated><id>http://approachable.tech/2016/11/18/Tutorial-2</id><content type="html" xml:base="http://approachable.tech/2016/11/18/Tutorial-2/">&lt;blockquote&gt;
   &lt;p&gt;“The sooner you start to code, the longer the program will take.” – Roy Carlson&lt;/p&gt;
 &lt;/blockquote&gt;
 
