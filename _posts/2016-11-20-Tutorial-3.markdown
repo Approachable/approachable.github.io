@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Tutorial 3: Buttons? We don't need no stinkin buttons!"
+title:      "Tutorial 3: Buttons? We don't need no stinkin' buttons!"
 date:       2016-11-20 12:00:00
 author:     "Approachable"
 ---
